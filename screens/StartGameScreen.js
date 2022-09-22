@@ -53,7 +53,7 @@ function StartGameScreen({ onPickNumber }) {
                 </View>
                 <View style={styles.buttonSizeFlex}>
                     <PrimaryButton onPress={confirmInputHandler}>
-                        Confirm
+                        Confirmm
                     </PrimaryButton>
                 </View>
             </View>
