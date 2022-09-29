@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Alert } from "react-native";
+import { Text, View, StyleSheet, Alert, Dimensions } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import Colors from "../constants/colors";
@@ -60,10 +60,16 @@ function GameScreen({ userNumber, onGameOver }) {
             setCurrentGuess(newRndNumber);
         }
     }
-    return (
-        <View style={styles.screen}>
+
+    const content = (
+        <>
             <Text style={styles.title}>Opponent's Guess</Text>
             <NumberContainer>{currentGuess}</NumberContainer>
+        </>
+    );
+    return (
+        <View style={styles.screen}>
+            {content}
             <Card>
                 <InstructionText style={styles.instructionText}>
                     Higher or lower?
@@ -83,19 +89,19 @@ function GameScreen({ userNumber, onGameOver }) {
                     </View>
                 </View>
             </Card>
-            <View>
-                <Text>LOG ROUNDS</Text>
-            </View>
         </View>
     );
 }
 
 export default GameScreen;
 
+const deviceHight = Dimensions.get("window").height;
+
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
         padding: 24,
+        alignItems: "center",
     },
     title: {
         fontSize: 18,
@@ -104,7 +110,8 @@ const styles = StyleSheet.create({
         textAlign: "center",
         borderWidth: 2,
         borderColor: Colors.white,
-        padding: 12,
+        paddingVertical: 12,
+        paddingHorizontal: 36,
     },
     buttonContainer: {
         flexDirection: "row",

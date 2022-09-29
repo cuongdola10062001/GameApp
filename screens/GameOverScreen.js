@@ -1,25 +1,49 @@
-import { View, Image, StyleSheet, Text } from "react-native";
+import {
+    View,
+    Image,
+    StyleSheet,
+    Text,
+    ScrollView,
+    useWindowDimensions,
+} from "react-native";
 
 import Colors from "../constants/colors";
 import Title from "../components/ui/Title";
 import PrimaryButton from "../components/ui/PrimaryButton";
 
 function GameOverScreen({ roundsNumber, userNumber, onStartNewGame }) {
-    console.log(userNumber);
+    const { width, height } = useWindowDimensions();
+
+    let imageSize = 300;
+
+    if (width < 380) {
+        imageSize = 150;
+    }
+    if (height < 400) {
+        imageSize = 80;
+    }
+
+    const imageStyle = {
+        width: imageSize,
+        height: imageSize,
+        borderRadius: imageSize / 2,
+    };
     return (
-        <View style={styles.rootContainer}>
-            <Title> GameOverScreen</Title>
-            <Text style={styles.text}>Number: {userNumber}</Text>
-            <View style={styles.imageContainer}>
-                <Image
-                    style={styles.image}
-                    source={require("../assets/images/success.png")}
-                />
+        <ScrollView>
+            <View style={styles.rootContainer}>
+                <Title> GameOverScreen</Title>
+                <Text style={styles.text}>Number: {userNumber}</Text>
+                <View style={[styles.imageContainer, imageStyle]}>
+                    <Image
+                        style={styles.image}
+                        source={require("../assets/images/success.png")}
+                    />
+                </View>
+                <PrimaryButton onPress={onStartNewGame}>
+                    Return Play Game
+                </PrimaryButton>
             </View>
-            <PrimaryButton onPress={onStartNewGame}>
-                Return Play Game
-            </PrimaryButton>
-        </View>
+        </ScrollView>
     );
 }
 
